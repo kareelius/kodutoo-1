@@ -1,82 +1,104 @@
-console.log("fail ühendatud");
-const pi = 3.14;
-let hours, minutes, seconds, day, month, year, dateTime;
-let fontSize = 25;
+console.log("fail töötab");
 
-function changeFontSizeBigger(){
+let fontSize = 80;
+let darkMode = true;
+
+// kell
+function updateClock() {
+    let now = new Date();
+
+    let h = now.getHours();
+    let m = now.getMinutes();
+    let s = now.getSeconds();
+
+    if (h < 10) h = "0" + h;
+    if (m < 10) m = "0" + m;
+    if (s < 10) s = "0" + s;
+
+    document.getElementById("hours").innerHTML = h + ":";
+    document.getElementById("minutes").innerHTML = m + ":";
+    document.getElementById("seconds").innerHTML = s;
+}
+
+// kuupäev
+function updateDate() {
+    let now = new Date();
+
+    let d = now.getDate();
+    let mo = now.getMonth() + 1;
+    let y = now.getFullYear();
+    let w = now.getDay();
+
+    let wd = "";
+
+    if (w == 0) wd = "Pühapäev";
+    if (w == 1) wd = "Esmaspäev";
+    if (w == 2) wd = "Teisipäev";
+    if (w == 3) wd = "Kolmapäev";
+    if (w == 4) wd = "Neljapäev";
+    if (w == 5) wd = "Reede";
+    if (w == 6) wd = "Laupäev";
+
+    if (d < 10) d = "0" + d;
+    if (mo < 10) mo = "0" + mo;
+
+    document.getElementById("day").innerHTML = d + ".";
+    document.getElementById("month").innerHTML = mo + ".";
+    document.getElementById("year").innerHTML = y;
+    document.getElementById("weekday").innerHTML = wd;
+}
+
+// suurem
+function bigger() {
     fontSize = fontSize + 5;
-    if(fontSize > 200){
-        fontSize = 200;
-        window.alert("Fondi suurus ei saa olla üle 200 piksli");
-    }
-    document.getElementById('dateContainer').style.fontSize =  fontSize + "px";
-    document.getElementById('clockContainer').style.fontSize =  fontSize + "px";
+    document.getElementById("clockContainer").style.fontSize = fontSize + "px";
 }
 
-function changeFontSizeSmaller(){
+// väiksem
+function smaller() {
     fontSize = fontSize - 5;
-    if(fontSize < 10){
-        fontSize = 10;
-        window.alert("Fondi suurus ei saa olla alla 10 piksli");
-    }
-    document.getElementById('dateContainer').style.fontSize =  fontSize + "px";
-    document.getElementById('clockContainer').style.fontSize =  fontSize + "px";
+    document.getElementById("clockContainer").style.fontSize = fontSize + "px";
 }
 
-function upDateClock() {
-    dateTime = new Date();
-
-    hours = dateTime.getHours();
-    minutes = dateTime.getMinutes();
-    seconds = dateTime.getSeconds();
-
-    if(hours < 10){
-        hours = "0" + hours;
-    }
-    if(minutes < 10){
-        minutes = "0" + minutes;
-    }
-    if(seconds < 10){
-        seconds = "0" + seconds;
-    }
-
-    document.getElementById('hours').innerHTML = hours + ":";
-    document.getElementById('minutes').innerHTML = minutes + ":";
-    document.getElementById('seconds').innerHTML = seconds;
+// värv
+function changeColor() {
+    document.getElementById("clockContainer").style.color = "red";
 }
 
-function updateDate(){
-    dateTime = new Date();
-    day = dateTime.getDate();
-    month = dateTime.getMonth() + 1;
-    year = dateTime.getFullYear();
-
-    if(day < 10){
-        day = "0" + day;
-    }
-    if(month < 10){
-        month = "0" + month;
-    }
-
-    document.getElementById('day').innerHTML = day + ".";
-    document.getElementById('month').innerHTML = month + ":";
-    document.getElementById('year').innerHTML = year;
-}
-
-function checkKey(e){
-    console.log(e.keyCode);
-    if(e.keyCode == 43){
-        changeFontSizeBigger();
-    }
-    if(e.keyCode == 45){
-        changeFontSizeSmaller();
+// taust
+function changeBackground() {
+    if (darkMode == true) {
+        document.body.style.backgroundColor = "white";
+        document.body.style.color = "black";
+        darkMode = false;
+    } else {
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "white";
+        darkMode = true;
     }
 }
 
-upDateClock();
+// font
+function changeFont() {
+    document.body.style.fontFamily = "Courier New";
+}
+
+// reset
+function resetAll() {
+    location.reload();
+}
+
+// eventid
+document.getElementById("bigger").addEventListener("click", bigger);
+document.getElementById("smaller").addEventListener("click", smaller);
+document.getElementById("colorChange").addEventListener("click", changeColor);
+document.getElementById("bgChange").addEventListener("click", changeBackground);
+document.getElementById("fontChange").addEventListener("click", changeFont);
+document.getElementById("reset").addEventListener("click", resetAll);
+
+// käivitus
+updateClock();
 updateDate();
-setInterval(upDateClock, 1000);
+
+setInterval(updateClock, 1000);
 setInterval(updateDate, 60000);
-document.getElementById('bigger').addEventListener('click', changeFontSizeBigger);
-document.getElementById('smaller').addEventListener('click', changeFontSizeSmaller);
-window.addEventListener('keypress', checkKey);

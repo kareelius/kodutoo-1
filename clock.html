@@ -1,30 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="et">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="clock.js" defer></script>
-    <link rel="stylesheet" href="clock.css">
     <title>Kell</title>
+    <link rel="stylesheet" href="clock.css">
+    <script src="clock.js" defer></script>
 </head>
 
 <body>
-    <!-- HTML struktureerimiseks: Ctrl+A Ctrl+K Ctrl+F -->
-    <div id="container">
-        <div id="clockContainer">
-            <div id="hours">00:</div>
-            <div id="minutes">00:</div>
-            <div id="seconds">00</div>
-        </div>
-        <div id="dateContainer">
-            <div id="day">01.</div>
-            <div id="month">01.</div>
-            <div id="year">2000</div>
-        </div>
-        <div id="buttonContainer">
-            <button id="bigger">+</button>
-            <button id="smaller">-</button>
+
+<div id="container">
+
+    <div id="clockContainer">
+        <span id="hours">00:</span>
+        <span id="minutes">00:</span>
+        <span id="seconds">00</span>
+    </div>
+
+    <div id="dateContainer">
+        <div id="weekday">Esmaspäev</div>
+        <div>
+            <span id="day">01.</span>
+            <span id="month">01.</span>
+            <span id="year">2000</span>
         </div>
     </div>
+
+    <div id="buttons">
+        <button id="bigger">+</button>
+        <button id="smaller">-</button>
+        <button id="colorChange">Värv</button>
+        <button id="bgChange">Taust</button>
+        <button id="fontChange">Font</button>
+        <button id="reset">Reset</button>
+    </div>
+
+    <p id="author">Autor: Karel Reose</p>
+
+    <p>
+        <a href="https://github.com/kareelius/kodutoo-1" target="_blank">
+            GitHub repo
+        </a>
+    </p>
+
+</div>
+
 </body>
 </html>
